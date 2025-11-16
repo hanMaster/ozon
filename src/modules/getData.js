@@ -1,5 +1,8 @@
-const getData = () => {
-    return fetch('http://localhost:3000/goods').then((res) => res.json());
+const getData = async () => {
+    const res = await fetch(
+        'https://ozon-intensive-default-rtdb.asia-southeast1.firebasedatabase.app/goods.json'
+    );
+    return res.json();
 };
 
 export default getData;
