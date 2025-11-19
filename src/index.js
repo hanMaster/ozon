@@ -8,7 +8,7 @@ import sale from './modules/sale.js';
 
 getData().then((data) => {
     const goods = data;
-    cart();
+    cart(goods);
     renderGoods(goods);
     search(goods);
     catalog(goods);
