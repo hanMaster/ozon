@@ -7,7 +7,7 @@ const renderGoods = (goods) => {
             'beforeend',
             `
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                    <div class="card">
+                    <div class="card" data-goodid="${item.id}">
                         ${
                             item.sale
                                 ? '<div class="card-sale">🔥Hot Sale🔥</div>'
