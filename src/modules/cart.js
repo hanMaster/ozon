@@ -9,6 +9,7 @@ const cart = (goods) => {
     const cartTotal = cartModal.querySelector('.cart-total > span');
     const cartWrapper = cartModal.querySelector('.cart-wrapper');
     const cartSendBtn = cartModal.querySelector('.cart-confirm');
+    const badge = document.querySelector('.counter');
 
     const loadCart = () => {
         return localStorage.getItem('cart') !== null
@@ -33,6 +34,7 @@ const cart = (goods) => {
 
     cartBtn.addEventListener('click', openCart);
     cartCloseBtn.addEventListener('click', closeCart);
+
     goodsContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-primary')) {
             const goodId = e.target.closest('.card').dataset.goodid;
@@ -40,6 +42,7 @@ const cart = (goods) => {
             const cart = loadCart();
             cart.push(good);
             saveCart(cart);
+            badge.textContent = cart.length;
         }
     });
 
@@ -50,6 +53,11 @@ const cart = (goods) => {
             const newCart = cart.filter((good) => good.id !== goodId);
             saveCart(newCart);
             renderCart(newCart);
+            cartTotal.textContent = newCart.reduce(
+                (acc, item) => acc + item.price,
+                0
+            );
+            badge.textContent = newCart.length;
         }
     });
 
@@ -59,8 +67,12 @@ const cart = (goods) => {
             localStorage.removeItem('cart');
             cartTotal.textContent = 0;
             renderCart([]);
+            badge.textContent = 0;
         });
     });
+
+    const cart = loadCart();
+    badge.textContent = cart.length;
 };
 
 export default cart;
